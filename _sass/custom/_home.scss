@@ -1,0 +1,36 @@
+$white: #FFFFFF;
+
+.site-header {
+  border-top: 5px solid $brand-color;
+  border-bottom: 1px solid $brand-color;
+}
+
+.hero {
+  background: $brand-color;
+  padding: 30px 50px 0 50px;
+  
+  border-bottom: 30px solid $brand-accent-color;
+  
+  .hero-text {
+    text-align: center;
+    color: $white;
+    font-size: 30px;
+    font-weight: 200;
+  }
+  
+  .hero-background {
+    height: 320px;
+    background-image: url('/assets/hero-header.png');
+    background-position: left top;
+    background-size: cover;
+  }
+}
+
+.padded-content {
+  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+}
