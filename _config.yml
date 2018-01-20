@@ -16,11 +16,14 @@
 title: fastlane screencast
 email: josh@rokkincat.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Video tutorials and written blog posts for all your fastlane needs! 
+  Video and tutorials for all your fastlane needs! 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: FastlaneCast
 github_username:  fastlane-screencast
+
+# permalink: /:categories/:year/:month/:day/:title.html
+permalink: /:categories/:year/:month/:day/:title
 
 # Build settings
 markdown: kramdown

@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2018-01-19 20:31:56 -0600
-categories: jekyll update
+episode: "Episode 1"
+video_url: https://player.vimeo.com/video/228246435
+title:  "Integrate fastlane into your Ionic build process"
+date:   2017-08-04 10:00:00 -0600
+categories: episodes
+tags: android ios
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
