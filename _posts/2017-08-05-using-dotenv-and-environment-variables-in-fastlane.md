@@ -6,34 +6,55 @@ title:  "Using dotenv and environment variables in fastlane"
 date:   2017-08-05 10:00:00 -0600
 categories: episodes
 tags: android ios
+slug: 2-using-dotenv-and-environment-variables-in-fastlane
+redirect_from:
+  - /using-dotenv-and-environment-variables-in-fastlane/
 ---
 
-Environment variables are a very powerful way to configure a `fastlane` environment. All `fastlane` setups are run off of a set of configurations which are passed into actions and plugins. These configurations can be things such as bundle identifiers, iTunesConnect credentials, and API secret tokens.
-
-Configurations are passed into actions and plugins through code in the `Fastfile`, through configuration files like `Gymfile` or `Deliverfile`, or through environment variables. This tutorial is going to walk through how to setup environment variables using [dotenv](https://github.com/bkeepers/dotenv) to make your `fastlane` codebase flexible and maintainable.
+Environment variables are a very powerful way to configure a `fastlane` environment. All `fastlane` setups are run off of a set of configurations which are passed into actions and plugins. These configurations can be things such as bundle identifiers, iTunesConnect credentials, and API secret tokens. Actions and plugins allow the configuration through environment variables. This tutorial is going to walk through how to setup environment variables using [dotenv](https://github.com/bkeepers/dotenv) to make your `fastlane` codebase flexible and maintainable. Anything that is likely to change should be pulled out into environment variables.
 
 We will cover the the following things:
 - Default `.env`
-- Multiple confirations with `.env.<config>`
+- Multiple configurations with `.env.<config>`
 - Secret configurations with `.env.secret` and `.gitignore`
 
+## Default Environment
+`fastlane` has `dotenv` built right in. When any lane is being executed, `dotenv` will run and will automatically load environment variables from a `.env` file. This `.env` file should be placed in your projects `fastlane` directly.
+
 {% highlight shell %}
-# .env
+# fastlane/.env
 STUFF = this is some stuff
 {% endhighlight %}
 
+## Multiple Environments
+`fastlane` also allows for loading of an additional environment through the `--env <environment>` command line option. `fastlane <lane-name> --env <environment>` will attempt to load a `dotenv` file of `.env.<environment>`.
+
+### config1
+`fastlane <lane-name> --env config1`
+
 {% highlight shell %}
-# .env.config1
+# fastlane/.env.config1
 CONFIG = this is config 1
 {% endhighlight %}
 
+### config2
+`fastlane <lane-name> --env config2`
+
 {% highlight shell %}
-# .env.config2
+# fastlane/.env.config2
 CONFIG = this is config 2
 {% endhighlight %}
 
+## Secrets Environment Variables
+It is good practice to commit your `.env` and `.env.<environment>` variables to version control so other developers (or CI) can run your lanes with minimal effor but sometimes there may be private or secret environment variables that you may want to be stored in their own `dotenv` file that are not commited to version control.
+
+This custom approach requires three steps:
+1. Create a `.env.secret` file
+2. Add `.env.secret` to your `.gitignore` file (if you are using git)
+3. Manually load `.env.secret` in the `before_all` block in your `Fastfile`
+
 {% highlight shell %}
-# .env.secret
+# fastlane/.env.secret
 SOME_API_TOKEN = 123456789
 {% endhighlight %}
 
@@ -43,13 +64,15 @@ SOME_API_TOKEN = 123456789
 {% endhighlight %}
 
 {% highlight ruby %}
-# Fastfile
+# fastlane/Fastfile
 fastlane_require 'dotenv'
 
 before_all do
   Dotenv.overload '.env.secret'
 end
 {% endhighlight %}
+
+## Fastfile Implementation
 
 {% highlight ruby %}
 # Fastfile

@@ -30,7 +30,7 @@ layout: default
         <span class="post-meta">{{ latestPost.date | date: date_format }}</span>
 
         <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ latestPost.episode }}: {{ latestPost.title | escape }}</a>
+          <a class="post-link" href="{{ latestPost.url | relative_url }}">{{ latestPost.episode }}: {{ latestPost.title | escape }}</a>
         </h3>
         
         <iframe src="{{ latestPost.video_url }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
