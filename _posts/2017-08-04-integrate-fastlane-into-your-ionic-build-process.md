@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: episode
 episode: "Episode 1"
 video_url: https://player.vimeo.com/video/228246435
 title:  "Integrate fastlane into your Ionic build process"

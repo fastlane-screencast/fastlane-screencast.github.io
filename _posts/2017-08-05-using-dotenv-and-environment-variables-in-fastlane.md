@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: episode
 episode: "Episode 2"
 video_url: https://player.vimeo.com/video/228243145
 title:  "Using dotenv and environment variables in fastlane"

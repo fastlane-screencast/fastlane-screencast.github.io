@@ -19,22 +19,39 @@ layout: default
 
     {{ content }}
 
-    {% if site.posts.size > 0 %}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
-      <ul class="post-list">
-        {% for post in site.posts %}
-          <li>
-            {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-            <span class="post-meta">{{ post.date | date: date_format }}</span>
+    {% assign episodes = site.posts | where:"layout", "episode" %}
 
-            <h3>
-              <a class="post-link" href="{{ post.url | relative_url }}">{{ post.episode }}: {{ post.title | escape }}</a>
-            </h3>
-          </li>
-        {% endfor %}
-      </ul>
+    {% if episodes.size > 0 %}
+    <h2 class="post-list-heading">Latest Episode</h2>
+    <ul class="post-list">
+      {% assign latestPost = episodes.first %}
+      <li>
+        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+        <span class="post-meta">{{ latestPost.date | date: date_format }}</span>
 
-      <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p> -->
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ latestPost.episode }}: {{ latestPost.title | escape }}</a>
+        </h3>
+        
+        <iframe src="{{ latestPost.video_url }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        
+      </li>
+    </ul>
+    
+    <h2 class="post-list-heading">Previous Episodes</h2>
+    <ul class="post-list">
+      {% assign prevPosts = episodes | shift %}
+      {% for post in prevPosts %}
+        <li>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+
+          <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.episode }}: {{ post.title | escape }}</a>
+          </h3>
+        </li>
+      {% endfor %}
+    </ul>
     {% endif %}
   </div>
 
