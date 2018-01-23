@@ -8,7 +8,14 @@ categories: episodes
 tags: android ios
 ---
 
-Preface A majority of the fastlane actions and plugins can be configured using environment variables. The code of fastlane setup that makes use of environment variables can make for a very clean looking codebase as well as making it the fastlane system easier to reconfigure. Environment variables are one of the most important parts of
+Environment variables are a very powerful way to configure a `fastlane` environment. All `fastlane` setups are run off of a set of configurations which are passed into actions and plugins. These configurations can be things such as bundle identifiers, iTunesConnect credentials, and API secret tokens.
+
+Configurations are passed into actions and plugins through code in the `Fastfile`, through configuration files like `Gymfile` or `Deliverfile`, or through environment variables. This tutorial is going to walk through how to setup environment variables using [dotenv](https://github.com/bkeepers/dotenv) to make your `fastlane` codebase flexible and maintainable.
+
+We will cover the the following things:
+- Default `.env`
+- Multiple confirations with `.env.<config>`
+- Secret configurations with `.env.secret` and `.gitignore`
 
 {% highlight shell %}
 # .env
